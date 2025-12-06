@@ -1,4 +1,5 @@
-# Se importa MLflow y uuid
+# se importa mlflow para el tracking de experimentos y uuid para generar identificadores únicos
+import os
 import uuid
 
 import mlflow
@@ -17,6 +18,10 @@ RANDOM_STATE = 123456
 
 def main():
 
+    # Configurar MLflow para usar ruta relativa
+    # tracking_uri = os.path.join(os.getcwd(), "mlruns")
+    # mlflow.set_tracking_uri(f"file://{tracking_uri}")
+
     args = parse_argument()
     model = select_model(args)
 
@@ -28,20 +33,18 @@ def main():
 
     mlflow.set_tracking_uri("file:mlruns")
     mlflow.set_experiment("wine_quality_experiment")
-
-    ## Se inicia un experimento en MLflow
+    # se inicia un experimento en MLflow
     mlflow.set_experiment("wine_quality_experiment")
     run_name = f"{args.model}_{uuid.uuid4().hex[:8]}"
     with mlflow.start_run(run_name=run_name):
 
-        ## log de los parámetros generales y del tipo de modelo
+        # log de los parametros generales y del tipo de modelo
         mlflow.log_param("file_path", FILE_PATH)
         mlflow.log_param("test_size", TEST_SIZE)
         mlflow.log_param("random_state", RANDOM_STATE)
         mlflow.log_param("model_type", args.model)
 
-        ## Log de los parámetros específicos de cada tipo de modelo
-
+        # log de los parametros especificos de cada tipo de modelo
         if args.model == "elasticnet":
             mlflow.log_param("alpha", args.alpha)
             mlflow.log_param("l1_ratio", args.l1_ratio)
@@ -52,21 +55,19 @@ def main():
 
         mse, mae, r2 = calculate_metrics(model, x_train, y_train)
         print_metrics("Training metrics", mse, mae, r2)
-
-        ## log de las métricas de entrenamiento
+        # log de las metricas de entrenamiento
         mlflow.log_metric("train_mse", mse)
         mlflow.log_metric("train_mae", mae)
         mlflow.log_metric("train_r2", r2)
 
         mse, mae, r2 = calculate_metrics(model, x_test, y_test)
         print_metrics("Testing metrics", mse, mae, r2)
-
-        ## log de las metricas de test
+        # log de las metricas de test
         mlflow.log_metric("test_mse", mse)
         mlflow.log_metric("test_mae", mae)
         mlflow.log_metric("test_r2", r2)
 
-        ## Ya no se requiere la función save_model_if_better,
+        ## Ya no se requiere la funcion save_model_if_better,
         ## ya que el modelo se guarda en el experimento de MLflow
         # save_model_if_better(model, x_test, y_test)
         mlflow.sklearn.log_model(
