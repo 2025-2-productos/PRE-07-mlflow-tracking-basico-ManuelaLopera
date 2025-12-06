@@ -2,7 +2,7 @@
 
 This script loads a model from MLflow and makes predictions on a dataset.
 
-$ python3 make_predictions.py
+$ python make_predictions.py
 
 
 """
