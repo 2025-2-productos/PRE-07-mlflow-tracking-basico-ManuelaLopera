@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/MANUCITA/Documents/Producto de datos/Semana 7/PRE-07-mlflow-tracking-basico-ManuelaLopera/mlruns/377797084232992877/69c87757f4f449789111d519c05a1e24/artifacts
+end_time: 1765041306208
+entry_point_name: ''
+experiment_id: '377797084232992877'
+lifecycle_stage: active
+run_id: 69c87757f4f449789111d519c05a1e24
+run_name: knn_ef347c59
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765041290567
+status: 3
+tags: []
+user_id: MANUCITA

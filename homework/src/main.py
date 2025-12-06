@@ -26,6 +26,9 @@ def main():
         random_state=RANDOM_STATE,
     )
 
+    mlflow.set_tracking_uri("file:mlruns")
+    mlflow.set_experiment("wine_quality_experiment")
+
     ## Se inicia un experimento en MLflow
     mlflow.set_experiment("wine_quality_experiment")
     run_name = f"{args.model}_{uuid.uuid4().hex[:8]}"

@@ -1,0 +1,6 @@
+artifact_location: file:///c:/Users/MANUCITA/Documents/Producto de datos/Semana 7/PRE-07-mlflow-tracking-basico-ManuelaLopera/mlruns/377797084232992877
+creation_time: 1765041259904
+experiment_id: '377797084232992877'
+last_update_time: 1765041259904
+lifecycle_stage: active
+name: wine_quality_experiment
